@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CountdownTimer {
+namespace CountdownTimer
+{
 
     /*
      * 
@@ -25,31 +26,36 @@ namespace CountdownTimer {
      *      Once it gets to "GO!" it will keep re-setting the
      *          text to "GO!" every frame forever
      */
-    public class CountdownTimer : MonoBehaviour {
-
+    public class CountdownTimer : MonoBehaviour
+    {
         Text textComponent;
-        float whenToShow2 = 1f;
-        float whenToShow1 = 2f;
-        float whenToShowGo = 3f;
-        float timeSinceCountdownStarted;
+        [SerializeField] float timeRemaining = 3;
+        [SerializeField] bool isCountingDown = false;
 
-        void Start() {
+        void Start()
+        {
+            isCountingDown = true;
             textComponent = gameObject.GetComponent<Text>();
-            textComponent.text = "3...";
+            textComponent.text = timeRemaining.ToString("F0") + "...";
         }
 
-        void Update() {
-
-            timeSinceCountdownStarted += Time.deltaTime;
-
-            if (timeSinceCountdownStarted > whenToShowGo) {
-                textComponent.text = "GO!";
-            } else if (timeSinceCountdownStarted > whenToShow1) {
-                textComponent.text = "1...";
-            } else if (timeSinceCountdownStarted > whenToShow2) {
-                textComponent.text = "2...";
+        void Update()
+        {
+            if (isCountingDown)
+            {
+                if (timeRemaining > 0)
+                {
+                    timeRemaining -= Time.deltaTime;
+                    textComponent.text = timeRemaining.ToString("F0") + "...";
+                }
+                else
+                {
+                    textComponent.text = "GO!";
+                    timeRemaining = 0;
+                    isCountingDown = false;
+                }
             }
-
         }
     }
 }
+
