@@ -1,6 +1,6 @@
 # Course Repo
 
 - **Title:** Programming Simple Functionality: Refactoring
-- **Taught by:** Unity Technologies
+- **Instructor:** Unity Technologies
 - **Platform:** Unity Learn
 - **Note(s):**
